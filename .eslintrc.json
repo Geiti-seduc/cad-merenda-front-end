@@ -1,0 +1,11 @@
+{
+    "env": {
+      "es2020": true
+    },
+    "extends": "trybe-frontend",
+    "rules": {
+      "sonarjs/no-duplicate-string": ["error", 5],
+      "global-require": "off" //<-- Desabilitar a regra global-require
+    }
+  }
+  

@@ -1,0 +1,74 @@
+.container-table{
+/*   max-width: 1270px;
+  width: 80vw; */
+  margin-bottom: 70px;
+  // .card{
+    // button{
+      // margin-bottom: 0;
+      // margin-top: 0;
+      // white-space: nowrap;
+      // font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      // 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      // sans-serif;
+    // }
+  // }
+  .p-datatable-wrapper{
+    .p-datatable-table{
+      thead{
+        border-bottom: 1px solid var(--silver);
+        tr{
+          background-color: white;
+          div{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 20px;
+            span{
+              margin: 10px 0;
+              padding: 10px 0;
+              font-size: 0.875em;
+              color: var(--silver);
+              svg{
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+      tbody{
+        .p-datatable-emptymessage{
+          vertical-align: top;
+        }
+        .p-datatable-emptymessage:hover{
+          background: var(--background-light);
+        }
+        tr{
+          td{
+            padding: 13px 20px;
+            font-size: em;
+          }
+        }
+        tr:hover{
+          background-color: var(--clouds);
+        }
+      }
+    }
+  }
+  .p-datatable-wrapper::-webkit-scrollbar {
+    width: 12px;               
+  }
+  
+  .p-datatable-wrapper::-webkit-scrollbar-track {
+    background: white;       
+  }
+  
+  .p-datatable-wrapper::-webkit-scrollbar-thumb {
+    background-color: #dddedf;   
+    border-radius: 20px;       
+    border: 3px solid white;  
+  }
+  .p-datatable-wrapper::-webkit-scrollbar-thumb:hover{
+    background-color: var(--silver);  
+  }
+  
+}

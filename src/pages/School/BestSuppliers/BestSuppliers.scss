@@ -1,0 +1,78 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+$color-span: #95A5A6;
+
+.bestSuppliers_page{
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .search-container{
+            margin: 50px 0;
+        }
+    }
+
+}
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+    max-width: 1270px;
+    border-bottom: 1px #ccc solid;
+    padding-bottom: 12px;
+    
+    .span-processo {
+        border: 2px $color-span solid;
+        font-size: 14px;
+        color: $color-span;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 16px;
+        border-radius: 5px;
+    }
+  }
+
+
+@media screen and (max-width: 1100px) {
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 80vw;
+        max-width: 1270px;
+        border-bottom: 1px #ccc solid;
+        padding-bottom: 12px;
+
+        .span-processo {
+            font-size: 12px;
+        }
+      }
+
+}
+
+@media screen and (max-width: 726px) {
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 80vw;
+        max-width: 1270px;
+        border-bottom: 1px #ccc solid;
+        padding-bottom: 12px;
+        text-align: center;
+
+        .span-processo {
+            font-size: 12px;
+        }
+    }
+    
+}

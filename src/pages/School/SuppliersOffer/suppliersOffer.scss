@@ -1,0 +1,22 @@
+
+.suppliersOffer{
+  .div-input{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    label{
+      color: var(--midnight);
+      font-weight: bold;
+      font-size: smaller;
+      padding: 5px 0;
+    }
+    input{
+      border: 1px solid var(--concrete);
+      border-radius: 5px;
+      height: 40px;
+      background-color: white;
+      padding-left: 10px;
+      color: var(--midnight);
+    }
+  }
+}
