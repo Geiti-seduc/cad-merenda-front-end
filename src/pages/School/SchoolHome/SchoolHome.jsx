@@ -1,70 +1,79 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable camelcase */
-// Components
-import { differenceInDays, addDays, format } from 'date-fns';
-import Alarm from '../../../assets/images/alarm.svg';
-import './SchoolHome.scss';
+import React, { useEffect, useState } from 'react';
+import { useAuthUser } from 'react-auth-kit';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import { fetchCountOffersByInep } from '../../../api/schoolRequests';
+import { decryptUser } from '../../../utils/encryptId';
+import { getUserById } from '../../../api/userRequests';
+import { useToast } from '../../../contexts/ToastContextProvider';
+import { useCycle } from '../../../contexts/CycleContextProvider';
 
 function SchoolHome() {
-  const offers = ' 12';
+  const [offerData, setOfferData] = useState([]);
+  const [endDate, setEndDate] = useState('');
+  const [days, setDays] = useState(0);
+  const authUser = useAuthUser();
+  const { token } = authUser();
+  const { cycle, id } = useCycle();
+  const { showToast } = useToast();
 
-  // Exemplo de datas
-  const currentDate = new Date();
-  const closingDate = addDays(currentDate, 7);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await getUserById(decryptUser(), token);
+        const inep = (userData.school_user[0].school_inep);
+        const params = {
+          inep,
+          id,
+        };
+        const res = await fetchCountOffersByInep(params, token);
+        setOfferData(parseInt(res, 10));
+      } catch (error) {
+        showToast('error', 'Erro', 'Não foi possível obter as ofertas');
+      }
+    };
 
-  // Calcula a diferença em dias entre as datas
-  const daysDifference = differenceInDays(closingDate, currentDate);
-
-  // Formata as datas para exibição
-  const formattedClosingDate = format(closingDate, ' dd/MM/yyyy');
-
-  // Se a diferença de dias for menor que 10, adiciona um zero à esquerda
-  // Verifica se a diferença de dias é menor que 10
-  const isLessThan10 = daysDifference < 10;
-  const daysDifferenceWithZero = isLessThan10
-    ? `0${daysDifference}`
-    : daysDifference;
-
-  // Se a diferença de dias for 1, exibe "DIA", senão, exibe "DIAS"
-  const daysDifferenceWithSpace = daysDifference === 1
-    ? `${daysDifferenceWithZero.toString()} DIA`
-    : `${daysDifferenceWithZero.toString()} DIAS`;
+    if (cycle) {
+      setEndDate(cycle.date);
+      setDays(cycle.daysToClose);
+    }
+    fetchData();
+  }, []);
 
   return (
-    <div className="schoolHome_page">
-      <div className="wrapper max-w-[1920px] gap-[25px]">
-        <div className="flex flex-col justify-center items-center gap-[25px]">
-          <h1 className="text-[#2C3E50] text-9xl font-extrabold">{ offers }</h1>
-          <h2
-            className="text-3xl font-bold
-         text-[#2C3E50]"
-          >
-            OFERTAS PARA A SUA ESCOLA ATÉ O MOMENTO
-
+    <div className="flex flex-col items-center justify-center w-screen mt-20 lg:mt-[25vh] gap-16">
+      <div className="flex flex-col lg:flex-row w-screen md:w-2/5 justify-between h-fit gap-16">
+        <div className="flex flex-col justify-between items-center gap-4">
+          <h2 className="text-2xl font-bold text-midnight">
+            SUA ESCOLA RECEBEU
+          </h2>
+          <h1 className="text-blue text-6xl font-extrabold">
+            { offerData }
+          </h1>
+          <h2 className="text-3xl font-bold text-midnight">
+            { (offerData && offerData === 1) ? 'OFERTA' : 'OFERTAS'}
           </h2>
         </div>
-
-        <div className="flex flex-col justify-center items-center gap-[22px]">
-          <div className="flex gap-[8px] item-scenter">
-            <img src={ Alarm } alt="" />
-            <h3 className="text-2xl text-[#2C3E50]">PERÍODO PARA OFERTAS ENCERRA EM:</h3>
+        <div className="border-l border-border hidden lg:block" />
+        <div className="flex flex-col justify-center items-center gap-4">
+          <div className="flex items-center">
+            <AccessAlarmIcon className="text-concrete mr-2" />
+            <h3 className="text-xl text-concrete">OFERTAS ENCERRAM EM:</h3>
           </div>
           <div
-            className="bg-[#005CA9] py-[8px] px-[146px] rounded-[10px]"
+            className="h-36 w-64 flex justify-center items-center rounded-xl"
           >
-            <h1
-              className="text-[60px] font-extrabold
-           text-white "
-            >
-              { daysDifferenceWithSpace }
+            <h1 className="text-5xl font-extrabold text-blue">
+              { days + (days === 1 ? ' DIA' : ' DIAS')}
             </h1>
           </div>
-          <span className="text-xl text-[#2C3E50]">
-            DATA DE ENCERRAMENTO:
-            { formattedClosingDate }
+          <span className="text-xl text-concrete">
+            {
+              endDate ? `DATA PREVISTA: ${endDate}` : ''
+            }
           </span>
         </div>
-
       </div>
     </div>
   );

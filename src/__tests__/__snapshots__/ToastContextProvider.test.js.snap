@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToastContextProvider should render ToastContextProvider component 1`] = `
+<DocumentFragment>
+  <div
+    class="p-toast p-component p-toast-top-right p-ripple-disabled"
+    data-pc-name="toast"
+    data-pc-section="root"
+    style="position: fixed; top: 20px; right: 20px;"
+  >
+    <div />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ToastContextProvider should render ToastContextProvider component with child component 1`] = `
+<DocumentFragment>
+  <div
+    class="p-toast p-component p-toast-top-right p-ripple-disabled"
+    data-pc-name="toast"
+    data-pc-section="root"
+    style="position: fixed; top: 20px; right: 20px;"
+  >
+    <div />
+  </div>
+  <div>
+    Child Component
+  </div>
+</DocumentFragment>
+`;

@@ -1,11 +1,26 @@
 {
-    "env": {
-      "es2020": true
-    },
-    "extends": "trybe-frontend",
-    "rules": {
-      "sonarjs/no-duplicate-string": ["error", 5],
-      "global-require": "off" //<-- Desabilitar a regra global-require
-    }
+  "extends":  ["airbnb", "airbnb/hooks", ""],
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "ecmaVersion": "latest"
+  },
+  "plugins": ["react-redux", "react-func"],
+  "rules": {
+    "global-require": "off",
+    "linebreak-style": "off",
+    "import/no-named-as-default-member": "off",
+    "react/jsx-filename-extension": "off",
+    "no-console": "off",
+    "import/no-named-as-default": "off",
+    "import/prefer-default-export": "off",
+    "react/require-default-props": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "react/forbid-prop-types": "off",
+    "react/no-array-index-key": "off" ,
+    "jsx-a11y/label-has-associated-control": [ 2, {
+      "controlComponents": ["InputText", "InputMask"]
+    }]
   }
   
+}

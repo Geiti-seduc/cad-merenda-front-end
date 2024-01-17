@@ -1,21 +1,24 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
+import PropTypes from 'prop-types';
+import React from 'react';
+import LaunchIcon from '@mui/icons-material/Launch';
 
-import External from '../../assets/images/External.svg';
-
-function LinkExternal(props) {
+function LinkExternal({ title, link = '.' }) {
   return (
-    <a href="#" className="flex gap-4 items-center">
+    <a href={link} className="flex gap-4 items-center">
       <h2
-        className="text-[#005CA9] text-2xl
+        className="text-blue text-2xl
     font-extrabold"
       >
-        { props.title }
+        { title }
       </h2>
-      <img src={ External } alt="Ícone external.svg" />
+      <LaunchIcon className="text-blue" />
     </a>
   );
 }
+
+LinkExternal.propTypes = {
+  title: PropTypes.string.isRequired,
+  link: PropTypes.string,
+};
 
 export default LinkExternal;

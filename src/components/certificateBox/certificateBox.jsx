@@ -1,71 +1,46 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/jsx-indent */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/jsx-curly-brace-presence */
-/* eslint-disable react/jsx-indent-props */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable no-unused-vars */
-/* eslint-disable camelcase */
-import Exclamacao_red from '../../assets/images/exclamacao-red.svg';
-import Exclamacao_orange from '../../assets/images/exclamacao-orange.svg';
-import File_dock from '../../assets/images/File_dock.svg';
+/* eslint-disable jsx-a11y/alt-text */
 
-import './certificateBox.scss';
+import { React } from 'react';
+import PropTypes from 'prop-types';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import ExpirationTag from '../Certificate/ExpirationTag';
+import AlertBadge from '../Certificate/AlertBadge';
 
-const certificateBox = (props) => (
-  <div className="flex flex-col">
-
-    <div className="topo-box-cnd">
-      {props.type_ex === 1 ? (
-        <img className="icone-aviso" src={ Exclamacao_red } alt="" />
-      ) : props.type_ex === 0 ? (
-        <img className="icone-aviso invisible" src={ Exclamacao_red } alt="" />
-      ) : (
-        <img className="icone-aviso" src={ Exclamacao_orange } alt="" />
-      )}
+function CertificateBox(
+  {
+    name,
+    state = '',
+    date = null,
+  },
+) {
+  return (
+    <div className="flex flex-col w-52 relative">
+      <button
+        type="button"
+      >
+        <div className="h-auto w-full flex flex-col gap-1">
+          <div
+            className="h-36 w-full border-2 border-blue flex
+            flex-col items-center justify-center gap-2 text-blue
+            rounded-lg bg-[#fff] cursor-default"
+          >
+            <DescriptionOutlinedIcon sx={{ fontSize: 50 }} />
+            <p className="font-black text-lg">{ name }</p>
+          </div>
+        </div>
+      </button>
+      {state !== '' && <ExpirationTag date={date} state={state} position="bottom" />}
+      {state !== 'ok' && <AlertBadge type={state} />}
     </div>
+  );
+}
 
-    <div
-      className="box-cnd hover:bg-[#fafafa]"
-    >
-      <img
-        className="picture pt-6"
-        src={ File_dock }
-        alt=""
-      />
-      <h1>{props.name_cnd}</h1>
-      {props.color_span === 1 ? (
-        <span
-          className="border-2 border-[#F63B42] relative
-        bottom-[-14px] bg-white text-[#F63B42] font-extrabold text-sm rounded-md
-        py-[2px] px-[10px]"
-        >
-                  VENCE EM
-          { ` ${props.due_date}`}
-        </span>
-      ) : props.color_span === 0 ? (
-        <span
-          className="border-2 border-[#14AE5C] relative
-          bottom-[-14px] bg-white text-[#14AE5C] font-extrabold text-sm rounded-md
-          py-[2px] px-[10px]"
-        >
-              VENCE EM
-          { ` ${props.due_date}`}
-        </span>
-      ) : (
-        <span
-          className="border-2 border-[#FF9842] relative
-            bottom-[-14px] bg-white text-[#FF9842] font-extrabold text-sm rounded-md
-            py-[2px] px-[10px]"
-        >
-                VENCE EM
-          { ` ${props.due_date}`}
-        </span>
-      )}
-    </div>
+CertificateBox.propTypes = {
+  name: PropTypes.string.isRequired,
+  state: PropTypes.string,
+  date: PropTypes.string,
 
-  </div>
+  // eslint-disable-next-line react/forbid-prop-types
+};
 
-);
-
-export default certificateBox;
+export default CertificateBox;

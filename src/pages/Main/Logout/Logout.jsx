@@ -9,13 +9,17 @@ function Logout() {
   const loginRoute = '/';
 
   useEffect(() => {
-    localStorage.clear();
-    signOut();
-    navigate(loginRoute);
+    setTimeout(() => {
+      signOut();
+      localStorage.clear();
+      navigate(loginRoute);
+    }, 2000);
   }, []);
 
   return (
-    <div />
+    <div className='h-screen flex items-center justify-center pb-20'>
+      <p className="text-blue font-black text-center text-4xl mt-10">Até logo!</p>
+    </div>
   );
 }
 
